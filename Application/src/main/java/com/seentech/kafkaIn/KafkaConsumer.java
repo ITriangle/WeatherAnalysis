@@ -5,10 +5,7 @@ import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import kafka.javaapi.consumer.ConsumerConnector;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Created by seentech on 2017/2/17.
@@ -54,4 +51,7 @@ public class KafkaConsumer extends Thread {
             }
         }
     }
+
+
+
 }

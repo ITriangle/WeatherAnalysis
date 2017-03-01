@@ -28,7 +28,10 @@
             <AppenderRef ref="File" />
         </Logger>
         <!--根记录全部输出到控制台上-->
-        <Root level="debug">
+        <!--<Root level="debug">-->
+            <!--<AppenderRef ref="Console" />-->
+        <!--</Root>-->
+        <Root level="info">
             <AppenderRef ref="Console" />
         </Root>
     </Loggers>

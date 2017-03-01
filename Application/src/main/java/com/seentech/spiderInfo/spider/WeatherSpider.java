@@ -1,6 +1,6 @@
 package com.seentech.spiderInfo.spider;
 
-import com.seentech.spiderInfo.model.WeatherWeather;
+import com.seentech.spiderInfo.model.WeatherInfo;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
@@ -33,6 +33,10 @@ public class WeatherSpider implements PageProcessor {
 
     @Override
     public void process(Page page) {
+
+        //获取地区编号
+        String addserCode = page.getUrl().regex("(\\d+).shtml", 1).toString();
+
         //最近7天天气
         Selectable sevenStr = page.getHtml().xpath("//div[@id='7d']/ul[@class='t clearfix']");
         //分时段天气
@@ -40,26 +44,26 @@ public class WeatherSpider implements PageProcessor {
         //最近24小时整体情况
 //		Selectable t24Str = page.getHtml().xpath("//div[@class='left fl']/script");
 
-        WeatherWeather weather = new WeatherWeather();
-        weather.setHour(handleHourStr(hourStr));
-        ;
 
-        List<String> list = handleSevenDays(sevenStr);
-        if (list != null && list.size() == 7) {
-            weather.setToday(list.get(0));
-            weather.setNextday(list.get(1));
-            weather.setNext2day(list.get(2));
-            weather.setNext3day(list.get(3));
-            weather.setNext4day(list.get(4));
-            weather.setNext5day(list.get(5));
-            weather.setNext6day(list.get(6));
+        WeatherInfo weatherInfo = new WeatherInfo();
+
+        weatherInfo.setAddress_code(Integer.parseInt(addserCode));
+
+        weatherInfo.setNext24hours_detailed(handleHourStr(hourStr));
+
+        List<String> stringList = handleSevenDays(sevenStr);
+        if(stringList != null && stringList.size() == 7){
+            weatherInfo.setToday_brief(stringList.get(0));
+            weatherInfo.setNext1day_brief(stringList.get(1));
+            weatherInfo.setNext2day_brief(stringList.get(2));
+            weatherInfo.setNext3day_brief(stringList.get(3));
+            weatherInfo.setNext4day_brief(stringList.get(4));
+            weatherInfo.setNext5day_brief(stringList.get(5));
+            weatherInfo.setNext6day_brief(stringList.get(6));
         }
-        page.putField("weather", weather);
-        page.putField("stationCode", page.getUrl().regex("(\\d+).shtml", 1));
 
-//        System.out.println(weather.toString());
-//
-//        System.out.println(page.getUrl().regex("(\\d+).shtml",1));
+        page.putField("weatherInfo", weatherInfo);
+
     }
 
     /**
@@ -113,6 +117,7 @@ public class WeatherSpider implements PageProcessor {
 
         return result;
     }
+
 
 
 }

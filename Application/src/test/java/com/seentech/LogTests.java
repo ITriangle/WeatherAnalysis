@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
  */
 public class LogTests {
 
-//    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final Logger logger = LoggerFactory.getLogger(LogTests.class);
+//    private final Logger logger = LoggerFactory.getLogger(LogTests.class);
 
 //    static private final Logger logger = LoggerFactory.getLogger(LogTests.class);
     @Test

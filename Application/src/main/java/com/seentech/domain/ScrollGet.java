@@ -125,15 +125,14 @@ public class ScrollGet {
     /**
      * 从 ES 中获取数据
      *
-     * @param esClient
      * @param index
      * @param type
      * @param searchObject
      * @return
      */
-    public List<String> scrollMacLog(ESClient esClient, String index, String type, SearchObject searchObject) {
+    public List<String> scrollMacLog( String index, String type, SearchObject searchObject) {
 
-        TransportClient client = esClient.getClient();
+        TransportClient client = ESClient.getClient();
 
         if (client == null) {
 
@@ -206,15 +205,14 @@ public class ScrollGet {
      * 查询结果直接写入文件,返回查询到记录的条数
      * 每个文件最大的记录数为5000
      *
-     * @param esClient
      * @param index
      * @param type
      * @param searchObject
      * @return
      */
-    public Integer scrollMacLogNum(ESClient esClient, String index, String type, SearchObject searchObject) {
+    public Integer scrollMacLogNum(String index, String type, SearchObject searchObject) {
 
-        TransportClient client = esClient.getClient();
+        TransportClient client = ESClient.getClient();
 
         if (client == null) {
 

@@ -23,7 +23,7 @@ public class KafkaTests {
         consumerThread.start();
 
         try {
-            Thread.sleep(10000);
+            Thread.sleep(100000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,5 @@
 package com.seentech.service;
 
-import com.seentech.domain.ESClient;
 import com.seentech.domain.GetObject;
 import com.seentech.domain.ScrollGet;
 import com.seentech.web.QueryParams.SearchObject;
@@ -21,9 +20,8 @@ public class ExecRequest {
 
         GetObject getObject = new GetObject();
 
-        ESClient esClient = new ESClient();
 
-        String json =  getObject.getMacLogStr(esClient, index, type, id);
+        String json =  getObject.getMacLogStr( index, type, id);
 
 
         if (json == null){
@@ -55,31 +53,7 @@ public class ExecRequest {
 
         ScrollGet scrollGet = new ScrollGet();
 
-        ESClient esClient = new ESClient();
-
-//        List<String> stringList = scrollGet.scrollMacLog(esClient, index, type, searchObject);
-//
-//
-//        if(stringList == null){
-//            return null;
-//        }else {
-//            /**
-//             * 获取结果,写入到 JSON 文件中
-//             */
-//
-//            String filePath ="./" + index + "_" + type + ".json";
-//
-//            StringBuilder stringBuilder = new StringBuilder();
-//
-//            for (String jsonData: stringList) {
-//                stringBuilder.append(jsonData);
-//            }
-//
-//            FileOperation.writeStringToFile(filePath, stringBuilder);
-//        }
-//        return stringList;
-
-        Integer num = scrollGet.scrollMacLogNum(esClient, index, type, searchObject);
+        Integer num = scrollGet.scrollMacLogNum(index, type, searchObject);
 
         return num;
 

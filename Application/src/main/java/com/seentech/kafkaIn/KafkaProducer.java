@@ -1,5 +1,6 @@
 package com.seentech.kafkaIn;
 
+import kafka.javaapi.producer.Producer;
 import kafka.producer.KeyedMessage;
 import kafka.producer.ProducerConfig;
 
@@ -10,16 +11,36 @@ import java.util.Properties;
  */
 public class KafkaProducer extends Thread {
 
-    private final kafka.javaapi.producer.Producer<Integer, String> producer ;
+    private final Producer<Integer, String> producer ;
+    private final Producer<String, String> producerString;
     private final String topic ;
     private final Properties props = new Properties();
+
+
 
     public KafkaProducer(String topic)
     {
         props.put("serializer.class", "kafka.serializer.StringEncoder");
-        props.put("metadata.broker.list", "127.0.0.1:9092");
-        producer = new kafka.javaapi.producer.Producer<Integer, String>(new ProducerConfig(props));
+        props.put("metadata.broker.list", KafkaProperties.kafkaConnect);
+        producer = new Producer<Integer, String>(new ProducerConfig(props));
+        producerString = new Producer<String, String>(new ProducerConfig(props));
         this.topic = topic;
+    }
+
+    public Producer<String, String> getProducerString() {
+        return producerString;
+    }
+
+    public static Producer<String, String> getProducerString(String topic){
+
+        return new KafkaProducer(topic).getProducerString();
+
+    }
+
+
+
+    public Producer<Integer, String> getProducer() {
+        return producer;
     }
 
     @Override
