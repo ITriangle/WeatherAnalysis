@@ -124,3 +124,6 @@ next6day_brief |   String
 记录编号采取自增的方式
 
 ### 4.other
+
+
+### 5.cankao
