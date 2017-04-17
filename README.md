@@ -122,3 +122,5 @@ next6day_brief |   String
 
 ### 3.记录编号
 记录编号采取自增的方式
+
+### 4.other
